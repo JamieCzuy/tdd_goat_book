@@ -1,4 +1,7 @@
-# Firfox geckodriver files:
+# Dev Database
+db.sqlite3
+
+# Firefox geckodriver files:
 geckodriver.log
 
 # Mac OS Files:
