@@ -1,23 +1,46 @@
+import unittest
 from selenium import webdriver
 
-# ---- Test Chrome Driver ---- #
-browser1 = webdriver.Chrome()
-browser1.implicitly_wait(10)
-browser1.get('http://www.google.com')
 
-assert 'Google' in browser1.title
-browser1.close()
+class NewVistorTest(unittest.TestCase):
 
-# ---- Test Firefox Driver ---- #
-browser2 = webdriver.Firefox()
-browser2.implicitly_wait(10)
-browser2.get('http://www.google.com')
+    def setUp(self):
+        self.browser = webdriver.Chrome()
+        # self.browser = webdriver.Firefox()
 
-assert 'Google' in browser2.title
-browser2.close()  # <--- Close on Firefox browser does not work
+    def tearDown(self):
+        self.browser.quit()
 
-# ---- Test from the Book ---- #
-browser = webdriver.Firefox()
-browser.get('http://localhost:8000')
+    def test_can_start_a_list_and_retrieve_it_later(self):
 
-assert 'Django' in browser.title
+        # Edith has heard about a cool new online to-do app. She goes
+        # to check out its homepage
+        self.browser.get('http://localhost:8000')
+
+        # She notices the page title and header mention to-do lists
+        self.assertIn('To-Do', self.browser.title)
+
+        # She is invited to enter a to-do item straight away
+
+        # She types "Buy peacock feathers" into a text box (Edith's hobby
+        # is tying fly-fishing lures)
+
+        # When she hits enter, the page updates, and now the page lists
+        # "1: Buy peacock feathers" as an item in a to-do list
+
+        # There is still a text box inviting her to add another item. She
+        # enters "Use peacock feathers to make a fly" (Edith is very methodical)
+
+        # The page updates again, and now shows both items on her list
+
+        # Edith wonders whether the site will remember her list. Then she sees
+        # that the site has generated a unique URL for her -- there is some
+        # explanatory text to that effect.
+
+        # She visits that URL - her to-do list is still there.
+
+        # Satisfied, she goes back to sleep
+        self.fail('Finish the test!')
+
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
