@@ -49,7 +49,7 @@ class ListViewTest(TestCase):
 
     def test_uses_list_template(self):
         response = self.client.get('/lists/the-only-list-in-the-world/')
-        self.assertTemplateUsed(response, 'lists')
+        self.assertTemplateUsed(response, 'list.html')
 
     def test_display_all_items(self):
         Item.objects.create(text='itemey 1')

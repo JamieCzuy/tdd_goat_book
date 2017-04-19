@@ -46,7 +46,7 @@ class NewVistorTest(LiveServerTestCase):
         # She notices the page title and header mention to-do lists
         self.assertIn('To-Do', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertEqual('Your To-Do list', header_text)
+        self.assertIn('To-Do list', header_text)
 
         # She is invited to enter a to-do item straight away
         inputbox = self.browser.find_element_by_id('id_new_item')
@@ -106,7 +106,7 @@ class NewVistorTest(LiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('Buy milk')
         inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy milk')
+        self._wait_for_row_in_list_table('1: Buy milk')
 
         # Francis gets his own unique URL
         francis_list_url = self.browser.current_url
