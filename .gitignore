@@ -1,3 +1,6 @@
+# Temp folders
+tmp/
+
 # Dev Database
 db.sqlite3
 
