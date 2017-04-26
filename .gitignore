@@ -1,3 +1,6 @@
+# Static files (built w/ collectstatic command)
+static/
+
 # Temp folders
 tmp/
 
