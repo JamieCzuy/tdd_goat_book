@@ -9,7 +9,8 @@ from lists.models import List
 def add_item(request, list_id):
     list_ = List.objects.get(id=list_id)
     Item.objects.create(text=request.POST['item_text'], list=list_)
-    return redirect(f'/lists/{list_.id}/')
+    return redirect('/lists/{}/'.format(list_.id))
+
 
 def home_page(request):
     return render(request, 'home.html')
@@ -25,9 +26,13 @@ def new_list(request):
         list_.delete()
         error = "You can't have an empty list item"
         return render(request, 'home.html', {'error': error})
-    return redirect(f'/lists/{list_.id}/')
+    return redirect('/lists/{}/'.format(list_.id))
 
 
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
-    return render(request, 'list.html', {'list': list_})
+    if request.method == 'POST':
+        Item.objects.create(text=request.POST['item_text'], list=list_)
+        return redirect('/lists/{}/'.format(list_.id))
+    else:
+        return render(request, 'list.html', {'list': list_})
