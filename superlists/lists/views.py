@@ -21,7 +21,7 @@ def new_list(request):
         item.delete()
         error = "You can't have an empty list item"
         return render(request, 'home.html', {'error': error})
-    return redirect('/lists/{}/'.format(list_.id))
+    return redirect('view_list', list_.id)
 
 
 # Note: I don't like how this function is formatted. I hope he fixes it!
@@ -34,7 +34,7 @@ def view_list(request, list_id):
             item = Item.objects.create(text=request.POST['item_text'], list=list_)
             item.full_clean()
             item.save()
-            return redirect('/lists/{}/'.format(list_.id))
+            return redirect(list_)
         except ValidationError:
             item.delete()
             error = "You can't have an empty list item"
